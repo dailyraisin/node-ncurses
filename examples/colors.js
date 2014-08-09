@@ -36,3 +36,17 @@ if (nc.hasColors) {
   w.close();
   console.log('Sorry, this example requires a terminal capable of displaying color.');
 }
+
+process.on('SIGTERM', function () {
+    console.log('Got SIGTERM, exiting...');
+    nc.cleanup();
+    w.close();
+    process.exit(0);
+});
+
+process.on('SIGINT', function () {
+    console.log('Got SIGINT, exiting...');
+    nc.cleanup();
+    w.close();
+    process.exit(0);
+});

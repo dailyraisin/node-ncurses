@@ -11,6 +11,20 @@ if (process.argv.length !== 3 || exampleList.indexOf(process.argv[2]) === -1) {
 var win = new nc.Window();
 nc.showCursor = false;
 
+process.on('SIGTERM', function () {
+    console.log('Got SIGTERM, exiting...');
+    nc.cleanup();
+    win.close();
+    process.exit(0);
+});
+
+process.on('SIGINT', function () {
+    console.log('Got SIGINT, exiting...');
+    nc.cleanup();
+    win.close();
+    process.exit(0);
+});
+
 switch (process.argv[2]) {
   case 'MessageBox':
     widgets.MessageBox('This is a really cool prompt!',
